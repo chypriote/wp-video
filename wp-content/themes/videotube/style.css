@@ -132,6 +132,9 @@
 		line-height: 56px;
 		padding: 0 14px;
 	}
+	#navigation-wrapper ul.menu li a:focus {
+		background-color: transparent;
+	}
 	#navigation-wrapper ul.menu li ul li a {
 		height: 30px;
 		line-height: 30px;
@@ -192,22 +195,24 @@
 
 	/*** SECTION HEADER ***/
 	.section-header {
-		overflow: hidden;
-		margin-bottom: 20px;
+		display: -webkit-flex;
+		display: -moz-flex;
+		display: -ms-flex;
+		display: -o-flex;
+		display: flex;
 	}
 	.section-header h3 {
 		color: #888;
 		font-size: 20px;
-		letter-spacing: 0px;
 		margin: 0;
 		font-weight: 300;
 		font-family: Lato, sens-serif;
-		float: left;
-		margin-top: 3px;
+		flex-grow: 1;
+		line-height: 2;
 	}
 	.section-header h3 i {
 		font-size: 13px;
-		background: #E73737;
+		background: #04b4e5;
 		color: #fff;
 		width: 22px;
 		height: 22px;
@@ -215,9 +220,7 @@
 		text-align: center;
 		border-radius: 50%;
 		letter-spacing: 0;
-		margin-right: 2px;
 		vertical-align: middle;
-		margin-top: -3px;
 	}
 	.section-header h3 i.fa-play {
 		font-size: 9px;
@@ -1092,7 +1095,6 @@
 		width: 100%;
 		border: 1px solid #eee;
 		padding: 12px;
-		margin-bottom: 25px;
 	}
 	.channel-image, .profile-widget-image {
 		float: left;
@@ -1115,4 +1117,39 @@
 		padding: 3px 7px;
 		margin-right: 5px;
 		margin-bottom: 5px;
+	}
+
+/*
+	Custom CSS
+*/
+	body {
+		display: -webkit-flex;
+		display: -moz-flex;
+		display: -ms-flex;
+		display: -o-flex;
+		display: flex;
+		-webkit-flex-direction: column;
+		-moz-flex-direction: column;
+		-ms-flex-direction: column;
+		-o-flex-direction: column;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+	body > .container {
+		flex-grow: 1;
+	}
+	.page .post-header h2 {
+		color: #04b4e5;
+		font-weight: bold;
+		border-bottom: 2px solid #04b4e5;
+		margin-bottom: 15px;
+		padding-bottom: 10px;
+	}
+	.section-header h3 {
+		color: #04b4e5;
+		font-weight: bold;
+	}
+	.sidebar-search input {
+		margin-bottom: 1px;
+		width: 100%;
 	}

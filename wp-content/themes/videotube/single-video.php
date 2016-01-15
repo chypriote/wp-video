@@ -12,7 +12,7 @@ $layout = get_post_meta($post->ID,'layout',true) ? get_post_meta($post->ID,'layo
 	                <h1><?php the_title();?></h1>
 	                <span class="views"><i class="fa fa-eye"></i><?php print get_post_meta($post->ID,'count_viewed',true);?></span>
 	                <a href="javascript:void(0)" class="likes-dislikes" action="like" id="<?php print $post->ID;?>"><span class="likes"><i class="fa fa-thumbs-up"></i><label class="likevideo<?php print $post->ID;?>"><?php if(function_exists('mars_get_like_count')) { print mars_get_like_count($post->ID); } ?></label></span></a>
-	            </div>          
+	            </div>
                 <div class="videoWrapper player">
                 	<?php print do_shortcode( apply_filters('videoframe',null) );?>
                 </div>
@@ -31,10 +31,10 @@ $layout = get_post_meta($post->ID,'layout',true) ? get_post_meta($post->ID,'layo
 	                </div>
 	                <div class="videoWrapper player">
 	                	<?php print do_shortcode( apply_filters('videoframe',null) );?>
-	                </div>     
+	                </div>
 	                <div id="lightoff"></div>
 				<?php endif;?>
-				<?php 
+				<?php
 					$defaults = array(
 						'before' => '<ul class="pagination">',
 						'after' => '</ul>',
@@ -44,9 +44,9 @@ $layout = get_post_meta($post->ID,'layout',true) ? get_post_meta($post->ID,'layo
 						'current_after' => '</li>',
 						'previouspagelink' => '&laquo;',
 						'nextpagelink' => '&raquo;'
-					);  
+					);
 					bootstrap_link_pages( $defaults );
-				?>				
+				?>
             	<div class="row video-options">
                     <div class="col-xs-3">
                         <a href="javascript:void(0)" class="option comments-scrolling">
@@ -54,14 +54,12 @@ $layout = get_post_meta($post->ID,'layout',true) ? get_post_meta($post->ID,'layo
                             <span class="option-text"><?php _e('Comments','mars')?></span>
                         </a>
                     </div>
-                    
                     <div class="col-xs-3">
                         <a href="javascript:void(0)" class="option share-button" id="off">
                             <i class="fa fa-share"></i>
                             <span class="option-text"><?php _e('Share','mars')?></span>
                         </a>
                     </div>
-                    
                     <div class="col-xs-3">
                         <a <?php if( !get_current_user_id() && $guestlike == 0 ):?>data-toggle="modal" data-target="#loginmodal" class="option"<?php endif;?> class="option likes-dislikes" href="javascript:void(0)" action="like" id="<?php print $post->ID;?>" id="buttonlike" video="<?php print $post->ID;?>">
                             <i class="fa fa-thumbs-up"></i>
@@ -83,7 +81,7 @@ $layout = get_post_meta($post->ID,'layout',true) ? get_post_meta($post->ID,'layo
 						      </div>
 						    </div>
 						  </div>
-						</div>                        
+						</div>
                         <!-- End modal -->
                         <?php endif;?>
                     </div>

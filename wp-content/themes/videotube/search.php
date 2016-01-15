@@ -14,7 +14,7 @@
                 </div>
 				<?php if( have_posts() ):?>
 				<div class="row video-section meta-maxwidth-230">
-					<?php 			
+					<?php
 					while ( have_posts() ) : the_post();
 					?>
 					<div class="col-sm-4 col-xs-6 item">

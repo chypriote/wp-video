@@ -1,5 +1,5 @@
 <?php if( !defined('ABSPATH') ) exit;?>
-                	<?php 
+                	<?php
                 		if( has_post_thumbnail() ){
                 			print '<a href="'.get_permalink($post->ID).'">'. get_the_post_thumbnail(NULL,'blog-large-thumb', array('class'=>'img-responsive')) .'</a>';
                 		}

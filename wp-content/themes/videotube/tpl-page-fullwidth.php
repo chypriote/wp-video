@@ -11,7 +11,6 @@
 			<?php the_post();?>
                     <?php get_template_part('content','page');?>
                 </div><!-- /.post -->
-                
 				<?php dynamic_sidebar('mars-blog-single-bellow-content-sidebar');?>
 			<?php 
 			if ( comments_open() || get_comments_number() ) {

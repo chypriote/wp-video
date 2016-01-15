@@ -28,7 +28,7 @@ class Mars_SearchForm_Widgets_Class extends WP_Widget{
 			<form method="get" action="<?php print home_url();?>">	
 				<div class="col-sm-6" id="header-search">
 					<span class="glyphicon glyphicon-search search-icon"></span>
-					<input value="<?php print get_search_query();?>" name="s" type="text" placeholder="<?php _e('Search here...','mars')?>" id="search">
+					<input value="<?php print get_search_query();?>" name="s" type="text" placeholder="<?php _e('Rechercher...','mars')?>" id="search">
 				</div>
 			</form>		
 		<?php 	

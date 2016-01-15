@@ -31,7 +31,7 @@ if( !function_exists('mars_get_user_role') ){
 		}
 		$user = new WP_User( $user_id );
 		if( isset( $user->roles[0] ) ){
-			return $user->roles[0];	
+			return $user->roles[0];
 		}
 		else{
 			return null;
@@ -67,7 +67,7 @@ if( !function_exists('post_orderby_options') ){
 			'date'	=>	__('Order by date','mars'),
 			'modified'	=>	__('Order by last modified date','mars'),
 			'rand'	=>	__('Order by Random','mars'),
-			'comment_count'	=>	__('Order by number of comments','mars')	
+			'comment_count'	=>	__('Order by number of comments','mars')
 		);
 		if( $post_type == 'video' ){
 			$orderby['views']	=	__('Order by Views','mars');
@@ -82,7 +82,7 @@ if( !function_exists('mars_wp_title') ){
 	    return get_bloginfo('name') . ' | ' . get_bloginfo( 'description' );
 	  }
 	  return $title;
-	}	
+	}
 }
 
 if( !function_exists('mars_theme_comment_style') ){
@@ -95,7 +95,7 @@ if( !function_exists('mars_theme_comment_style') ){
 			<div class="the-comment">
 				<?php if ( '0' == $comment->comment_approved ) : ?>
 					<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'mars' ); ?></p>
-				<?php endif; ?>			
+				<?php endif; ?>
 				<div class="avatar"><?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['avatar_size'] ); ?></div>
 				<div class="comment-content">
 					<span class="author"><?php print $comment->comment_author;?> <small><?php print human_time_diff( get_comment_time('U'), current_time('timestamp') ) . ' ago';?></small></span>
@@ -105,8 +105,8 @@ if( !function_exists('mars_theme_comment_style') ){
 					<a href="<?php print get_edit_comment_link( $comment->comment_ID );?>" class="edit"><i class="fa fa-edit"></i> <?php _e('Edit','mars');?></a>
 					<?php endif;?>
 				</div>
-			</div>		
-		<?php 
+			</div>
+		<?php
 	}
 }
 
@@ -128,7 +128,7 @@ if( !function_exists('mars_wp_nav_menu_args') ){
 		$args['container'] = false;
 		return $args;
 	}
-	add_filter( 'wp_nav_menu_args', 'mars_wp_nav_menu_args' );	
+	add_filter( 'wp_nav_menu_args', 'mars_wp_nav_menu_args' );
 }
 if( !class_exists('Mars_Walker_Nav_Menu') ){
 	class Mars_Walker_Nav_Menu extends Walker_Nav_Menu {
@@ -138,33 +138,33 @@ if( !class_exists('Mars_Walker_Nav_Menu') ){
 	   function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
 	       $item_html = '';
 	       parent::start_el($item_html, $item, $depth, $args);
-	
+
 	       if ( $item->is_dropdown && $depth === 0 ) {
 	           //$item_html = str_replace( '<a', '<a class="dropdown-toggle" data-toggle="dropdown"', $item_html );
 	           $item_html = str_replace( '<a', '<a', $item_html );
 	           $item_html = str_replace( '</a>', ' <b class="caret"></b></a>', $item_html );
 	       }
-	
+
 	       $output .= $item_html;
 	    }
 	    function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) {
 	        if ( $element->current )
 	        $element->classes[] = 'active';
-	
+
 	        $element->is_dropdown = !empty( $children_elements[$element->ID] );
-	
+
 	        if ( $element->is_dropdown ) {
 	            if ( $depth === 0 ) {
 	                $element->classes[] = 'dropdown';
 	            } elseif ( $depth === 1 ) {
-	                // Extra level of dropdown menu, 
+	                // Extra level of dropdown menu,
 	                // as seen in http://twitter.github.com/bootstrap/components.html#dropdowns
 	                $element->classes[] = 'dropdown-submenu';
 	            }
 	        }
 	    	parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
 	    }
-	}	
+	}
 }
 if( !function_exists('mars_add_parent_css') ){
 	function mars_add_parent_css($classes, $item){
@@ -174,7 +174,7 @@ if( !function_exists('mars_add_parent_css') ){
 	         $classes[] = 'dropdown';
 	    return $classes;
 	}
-	add_filter('nav_menu_css_class','mars_add_parent_css',10,2);	
+	add_filter('nav_menu_css_class','mars_add_parent_css',10,2);
 }
 if( !function_exists('mars_resave_real_video') ){
 	function mars_resave_real_video($post_id) {
@@ -203,13 +203,13 @@ if( !function_exists('mars_get_remote_videoid') ){
 			return;
 		$string = parse_url($url);
 		$host = $string['host'];
-		
+
 		if( $host == 'vimeo.com' || $host =='www.vimeo.com' ){
 			$video_id = substr($string['path'], 1);
 		}
 		if( $host == 'youtube.com' || $host =='www.youtube.com' ){
 			parse_str( parse_url( $url, PHP_URL_QUERY ), $array_of_vars );
-			$video_id = $array_of_vars['v'];			
+			$video_id = $array_of_vars['v'];
 		}
 		return array(
 			'id'	=>	$video_id,
@@ -315,7 +315,7 @@ if( !function_exists('mars_seo_limit_leng_titlewords') ){
 	function mars_seo_limit_leng_titlewords( $string, $length = 4 ) {
 		$subtring = null;
 		if( function_exists( 'mb_strcut' ) ){
-			$subtring = mb_strcut($string, 0, $length);	
+			$subtring = mb_strcut($string, 0, $length);
 		}
 		else{
 			$subtring = $string;
@@ -337,41 +337,41 @@ if( !function_exists('mars_limit_leng_titlewords') ){
 				if( strlen( $the_title ) > $length ){
 					$subtring = $subtring . '...';
 				}
-				return $subtring;				
+				return $subtring;
 			}
 		}
 		return $the_title;
 	}
 	//add_filter( 'the_title', 'mars_limit_leng_titlewords', 100,1 );
 }
-add_filter ( 'wp_tag_cloud', 'mars_tag_cloud_font_size_class' );  
+add_filter ( 'wp_tag_cloud', 'mars_tag_cloud_font_size_class' );
 if( !function_exists('mars_tag_cloud_font_size_class') ){
-	function mars_tag_cloud_font_size_class( $taglinks ) { 
+	function mars_tag_cloud_font_size_class( $taglinks ) {
 	    $tags = explode('</a>', $taglinks);
-	    $regex1 = "#(.*style='font-size:)(.*)((pt|px|em|pc|%);'.*)#e"; 
-	    $regex2 = "#(style='font-size:)(.*)((pt|px|em|pc|%);')#e";         
-	    $regex3 = "#(.*class=')(.*)(' title.*)#e";         
-	    foreach( $tags as $tag ) {         
-	        $size = preg_replace($regex1, "(''.round($2).'')", $tag ); //get the rounded font size       
+	    $regex1 = "#(.*style='font-size:)(.*)((pt|px|em|pc|%);'.*)#e";
+	    $regex2 = "#(style='font-size:)(.*)((pt|px|em|pc|%);')#e";
+	    $regex3 = "#(.*class=')(.*)(' title.*)#e";
+	    foreach( $tags as $tag ) {
+	        $size = preg_replace($regex1, "(''.round($2).'')", $tag ); //get the rounded font size
 	        $tag = preg_replace($regex2, "('')", $tag ); //remove the inline font-size style
 	        $tag = preg_replace($regex3, "('$1tag $2$3')", $tag ); //add .tag-size-{nr} class
 	        $tagn[] = $tag;
-	    }     
-	    $taglinks = implode('</a>', $tagn);     
-		return $taglinks; 
-	}	
+	    }
+	    $taglinks = implode('</a>', $tagn);
+		return $taglinks;
+	}
 }
 //---------------------------------------- Count viewed ------------------------------------------
 
 if( !function_exists('mars_get_count_viewed') ){
 	function mars_get_count_viewed() {
 		global $post;
-		return get_post_meta($post->ID,'count_viewed',true) ? get_post_meta($post->ID,'count_viewed',true) : 1;		
+		return get_post_meta($post->ID,'count_viewed',true) ? get_post_meta($post->ID,'count_viewed',true) : 1;
 	}
 }
 if( !function_exists('mars_add_viewed') ){
 	function mars_add_viewed() {
-	    if(!isset($_SESSION)){ session_start();} 
+	    if(!isset($_SESSION)){ session_start();}
 		global $post;
 		if( is_single() ){
 			if( isset( $_SESSION['count_viewed'] ) ){
@@ -381,7 +381,7 @@ if( !function_exists('mars_add_viewed') ){
 			}
 			$current_viewed = mars_get_count_viewed();
 			update_post_meta($post->ID, 'count_viewed', $current_viewed + 1);
-			$_SESSION['count_viewed'][] = $post->ID;			
+			$_SESSION['count_viewed'][] = $post->ID;
 		}
 	}
 	add_action('wp', 'mars_add_viewed');
@@ -391,7 +391,7 @@ if( !function_exists('mars_add_1firstlike') ){
 		if( get_post_type( $post_id ) =='video' ){
 			$likes = mars_get_like_count( $post_id );
 			if( $likes == 0 || !$likes ){
-				update_post_meta($post_id, 'like_key', 1);	
+				update_post_meta($post_id, 'like_key', 1);
 			}
 		}
 	}
@@ -401,12 +401,12 @@ if( !function_exists('mars_add_1firstlike') ){
 if( !function_exists('mars_get_like_count') ){
 	function mars_get_like_count($post_id) {
 		return get_post_meta($post_id, 'like_key',true) ? get_post_meta($post_id, 'like_key',true)  : 0;
-	}	
+	}
 }
 if( !function_exists('mars_get_dislike_count') ){
 	function mars_get_dislike_count($post_id) {
 		return get_post_meta($post_id, 'dislike_key',true) ? get_post_meta($post_id, 'dislike_key',true)  : 0;
-	}	
+	}
 }
 //---------------------------------------- like and dislike button ------------------------------------------
 
@@ -500,7 +500,7 @@ if( !function_exists('mars_add_google_analytics') ){
 				ga.src = (\'https:\' == document.location.protocol ? \'https://ssl\' : \'http://www\') + \'.google-analytics.com/ga.js\';
 				var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(ga, s);
 				})();
-				</script>			
+				</script>
 			';
 		}
 	}
@@ -522,7 +522,7 @@ if( !function_exists('mars_special_nav_class') ){
 	     	$classes[] = 'active ';
 	     }
 	     return $classes;
-	}	
+	}
 }
 add_filter('nav_menu_css_class' , 'mars_special_nav_class' , 10 , 2);
 
@@ -537,22 +537,22 @@ if( !function_exists( 'mars_get_user_postcount' ) ){
 if( !function_exists( 'mars_get_user_metacount' ) ){
 	function mars_get_user_metacount( $user_id, $key ) {
 		global $wpdb;
-		$query = $wpdb->get_var( $wpdb->prepare( 
+		$query = $wpdb->get_var( $wpdb->prepare(
 			"
-				SELECT sum(meta_value) 
+				SELECT sum(meta_value)
 				FROM $wpdb->postmeta LEFT JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.ID )
 				LEFT JOIN $wpdb->users ON ( $wpdb->posts.post_author = $wpdb->users.ID )
 				WHERE meta_key = %s
 				AND $wpdb->users.ID = %s
 				AND $wpdb->posts.post_status = %s
 				AND $wpdb->posts.post_type = %s
-			", 
+			",
 			$key,
 			$user_id,
 			'publish',
 			'video'
 		) );
-		return (int)$query > 0 ? number_format_i18n($query) : 0; 
+		return (int)$query > 0 ? number_format_i18n($query) : 0;
 	}
 }
 if( !function_exists( 'mars_viaudiofile_format' ) ){
@@ -619,7 +619,7 @@ if( !function_exists( 'mars_check_file_size_allowed' ) ){
 		if( !$file )
 			return false;
 		if( $type == 'video' ){
-			$filesize = isset( $videotube['videosize'] ) ? (int)$videotube['videosize'] : 10;	
+			$filesize = isset( $videotube['videosize'] ) ? (int)$videotube['videosize'] : 10;
 		}
 		else{
 			$filesize = isset( $videotube['imagesize'] ) ? (int)$videotube['imagesize'] : 2;
@@ -647,13 +647,13 @@ if( !function_exists( 'mars_insert_attachment' ) ){
 	function mars_insert_attachment($file_handler, $post_id, $setthumb='false', $post_meta = '') {
 		// check to make sure its a successful upload
 		if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();
-	
+
 		require_once(ABSPATH . "wp-admin" . '/includes/image.php');
 		require_once(ABSPATH . "wp-admin" . '/includes/file.php');
 		require_once(ABSPATH . "wp-admin" . '/includes/media.php');
-	
+
 		$attach_id = media_handle_upload( $file_handler, $post_id );
-	
+
 		if ($setthumb) update_post_meta($post_id,'_thumbnail_id',$attach_id);
 		if(!$setthumb && $post_meta!=''){
 			update_post_meta($post_id, $post_meta, $attach_id);
@@ -663,7 +663,7 @@ if( !function_exists( 'mars_insert_attachment' ) ){
 }
 if( !function_exists( 'mars_videolayout' ) ){
 	function mars_videolayout() {
-		return array( 
+		return array(
 			'small'	=>	__('Small','mars'),
 			'large'	=>	__('Large','mars')
 		);
@@ -691,25 +691,25 @@ if( !function_exists( 'bootstrap_link_pages' ) ){
 	        'pagelink'    => '%',
 	        'echo'        => 1
 	    );
-	 
+
 	    $r = wp_parse_args( $args, $defaults );
 	    $r = apply_filters( 'wp_link_pages_args', $r );
 	    extract( $r, EXTR_SKIP );
-	 
+
 	    global $page, $numpages, $multipage, $more, $pagenow;
-	 
+
 	    if ( ! $multipage )
 	    {
 	        return;
 	    }
-	 
+
 	    $output = $before;
-	 
+
 	    for ( $i = 1; $i < ( $numpages + 1 ); $i++ )
 	    {
 	        $j       = str_replace( '%', $i, $pagelink );
 	        $output .= ' ';
-	 
+
 	        if ( $i != $page || ( ! $more && 1 == $page ) )
 	        {
 	            $output .= "{$before_link}" . _wp_link_page( $i ) . "{$link_before}{$j}{$link_after}</a>{$after_link}";
@@ -719,7 +719,7 @@ if( !function_exists( 'bootstrap_link_pages' ) ){
 	            $output .= "{$current_before}{$link_before}<a>{$j}</a>{$link_after}{$current_after}";
 	        }
 	    }
-	 
+
 	    print $output . $after;
-	}	
+	}
 }

@@ -9,7 +9,7 @@
                 </div>
 				<?php if( have_posts() ):?>
 				<div class="row video-section meta-maxwidth-230">
-					<?php 			
+					<?php
 					while ( have_posts() ) : the_post();
 					?>
 					<div class="col-sm-4 col-xs-6 item">
@@ -20,7 +20,7 @@
 							}
 						?>
 							<a href="<?php echo get_permalink(get_the_ID()); ?>"><div class="img-hover"></div></a>
-						</div>						
+						</div>
 						<h3><a href="<?php the_permalink();?>"><?php the_title();?></a></h3>
 						<?php print apply_filters('mars_video_meta',null);?>
 					</div>
