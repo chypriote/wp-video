@@ -68,7 +68,8 @@
 								$final[$value->parent]['child'][] = $value;
 							}
 						}
-						var_dump($final);
+						//var_dump($final);
+						//var_dump(get_term(307, 'categories'));
 					?>
 			  	<?php
 			  		if( has_nav_menu('header_main_navigation') ){
