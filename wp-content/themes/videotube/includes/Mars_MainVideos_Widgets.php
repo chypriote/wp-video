@@ -16,10 +16,10 @@ if( !function_exists('Mars_MainVideos_Widgets') ){
 class Mars_MainVideos_Widgets_Class extends WP_Widget{
 	function Mars_MainVideos_Widgets_Class(){
 		$widget_ops = array( 'classname' => 'mars-mainvideo-widgets', 'description' => __('VT Main Videos Widget', 'wpo') );
-		
+
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'mars-mainvideo-widgets' );
-		
-		$this->WP_Widget( 'mars-mainvideo-widgets', __('VT Main Videos Widget', 'wpo'), $widget_ops, $control_ops );		
+
+		$this->WP_Widget( 'mars-mainvideo-widgets', __('VT Main Videos Widget', 'wpo'), $widget_ops, $control_ops );
 	}
 	function widget($args, $instance){
 		extract( $args );
@@ -32,22 +32,22 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 		$video_order = isset( $instance['video_order'] ) ? $instance['video_order'] : 'DESC';
 		$widget_column = isset( $instance['widget_column'] ) ? $instance['widget_column'] : 3;
 		$video_rows = isset( $instance['rows'] ) ? (int)$instance['rows'] : 1;
-		$autoplay = isset( $instance['auto'] ) ? $instance['auto'] : null;		
-		$video_shows = isset( $instance['video_shows'] ) ? (int)$instance['video_shows'] : 16;  
+		$autoplay = isset( $instance['auto'] ) ? $instance['auto'] : null;
+		$video_shows = isset( $instance['video_shows'] ) ? (int)$instance['video_shows'] : 16;
 		$i=0;
 		$videos_query = array(
 			'post_type'	=>	'video',
 			'showposts'	=>	$video_shows,
 			'posts_per_page'	=>	$video_shows
 		);
-                       	
+
 		if( $video_category ){
 			$videos_query['tax_query'] = array(
 				array(
 				'taxonomy' => 'categories',
 				'field' => 'id',
 				'terms' => $video_category
-				)		                       		
+				)
 			);
 		}
 		if( $video_tag ){
@@ -64,10 +64,10 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 			}
 			elseif( $video_orderby == 'likes' ){
 				$videos_query['meta_key'] = 'like_key';
-				$videos_query['orderby']	=	'meta_value_num';				
-			}			
+				$videos_query['orderby']	=	'meta_value_num';
+			}
 			else{
-				$videos_query['orderby'] = $video_orderby;	
+				$videos_query['orderby'] = $video_orderby;
 			}
 		}
 		if( $video_order ){
@@ -82,7 +82,7 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 					'day'   => isset( $dateime[2] ) ? $dateime[2] : null,
 				)
 			);
-		}				
+		}
 		$wp_query = new WP_Query( $videos_query );
 		$colum = ( $widget_column == 3 ) ? 3 : 1;
 		?>
@@ -108,15 +108,15 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 					            <?php if( $video_shows >= $wp_query->post_count && $video_shows > $colum*$video_rows ):?>
 						            <ol class="carousel-indicators section-nav">
 						            	<li data-target="#carousel-latest-<?php print $this->id; ?>" data-slide-to="0" class="bullet active"></li>
-						                <?php 
+						                <?php
 						                	$c = 0;
 						                	for ($j = 1; $j < $wp_query->post_count; $j++) {
 						                		if ( $j % ($colum*$video_rows) == 0 && $j < $video_shows ){
 							                    	$c++;
-							                    	print '<li data-target="#carousel-latest-'.$this->id.'" data-slide-to="'.$c.'" class="bullet"></li> '; 
-							                    }	
+							                    	print '<li data-target="#carousel-latest-'.$this->id.'" data-slide-to="'.$c.'" class="bullet"></li> ';
+							                    }
 						                	}
-						                ?>				                
+						                ?>
 						            </ol>
 					            <?php endif;?>
 				            <?php endif;?>
@@ -128,23 +128,23 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 							<?php endif;?>
 	                    <?php endif;?>
                     </div>
-                    
+
                     <?php if( $widget_column == 3 ):?>
 	                    <div class="latest-wrapper">
 	                    	<div class="row">
 			                     <div class="carousel-inner">
 			                       	<?php
-			                       	if( $wp_query->have_posts() ) : 
+			                       	if( $wp_query->have_posts() ) :
 			                       		$i =0;
 				                       	while ( $wp_query->have_posts() ) : $wp_query->the_post();
 				                       	$i++;
 				                       	?>
 				                       	<?php if( $i == 1 ):?>
 				                       		<div class="item active">
-				                       	<?php endif;?>	
-				                       		<div id="video-main-<?php print $this->id; ?>-<?php the_ID();?>" class="col-sm-4 col-xs-6 item video-<?php print get_the_ID();?>">
+				                       	<?php endif;?>
+				                       		<div id="video-main-<?php print $this->id; ?>-<?php the_ID();?>" class="col-sm-15 col-xs-6 item video-<?php print get_the_ID();?>">
 				                                <div class="item-img">
-													<?php 
+													<?php
 														if(has_post_thumbnail()){
 															print '<a title="'.get_the_title().'" href="'.get_permalink(get_the_ID()).'">'. get_the_post_thumbnail(null,'video-lastest', array('class'=>'img-responsive')) .'</a>';
 														}
@@ -153,30 +153,30 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 												</div>
 	                                            <h3><a title="<?php the_title();?>" href="<?php the_permalink();?>"><?php the_title();?></a></h3>
 												<?php print apply_filters('mars_video_meta', null);?>
-		                                     </div> 
+		                                     </div>
 					                    <?php
-					                    if ( $i % (3*$video_rows) == 0 && $i < $video_shows ){
+					                    if ( $i % (5*$video_rows) == 0 && $i < $video_shows ){
 					                    //if ( $i % ( $widget_column*2 ) == 0 ){
-					                    	?></div><div class="item"><?php 
-					                    } 	             
+					                    	?></div><div class="item"><?php
+					                    }
 				                       	endwhile;
-				                      ?></div><?php 
+				                      ?></div><?php
 			                       	endif;
-			                       	?> 
+			                       	?>
 			                        </div>
 	                            </div>
 	                    </div>
                    	<?php elseif( $widget_column == 2 ):?>
-                   		<?php if( $wp_query->have_posts() ) : while ( $wp_query->have_posts() ) : $wp_query->the_post();?>                	
+                   		<?php if( $wp_query->have_posts() ) : while ( $wp_query->have_posts() ) : $wp_query->the_post();?>
 						<div class="col-sm-6 item">
 							<div class="item-img">
-							<?php 
+							<?php
 								if(has_post_thumbnail()){
 									print '<a href="'.get_permalink().'" title="'.get_the_title().'">'. get_the_post_thumbnail(null,'video-featured', array('class'=>'img-responsive')) . '</a>';
 								}
                                 ?>
 								<a href="<?php echo get_permalink(get_the_ID()); ?>"><div class="img-hover"></div></a>
-							</div>                                
+							</div>
 							<h3><a href="<?php the_permalink();?>"><?php the_title();?></a></h3>
 							<?php print apply_filters('mars_video_meta',null);?>
 						</div>
@@ -186,7 +186,7 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
                     <div class="gaming-wrapper">
                        	<div class="carousel-inner carousel-<?php print $this->id;?>">
 	                       	<?php
-	                       	if( $wp_query->have_posts() ) : 
+	                       	if( $wp_query->have_posts() ) :
 		                       	while ( $wp_query->have_posts() ) : $wp_query->the_post();
 		                       	$i++;
 		                       	?>
@@ -196,26 +196,26 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
                                     <div class="row">
                                         <div class="col-sm-5 item list">
                                         	 <div class="item-img">
-                                        	<?php 
+                                        	<?php
                                         		if( has_post_thumbnail() ){
                                         			print '<a href="'.get_permalink().'" title="'.get_the_title().'">'. get_the_post_thumbnail(null,'video-category-featured', array('class'=>'img-responsive')) . '</a>';
                                         		}
                                         	?>
                                         		<a href="<?php echo get_permalink(get_the_ID()); ?>"><div class="img-hover"></div></a>
-                                        	</div>                                        	
+                                        	</div>
                                         </div>
                                         <div class="col-sm-7 item list <?php print $this->id; ?>-<?php print get_the_ID();?>">
                                             <h3><a title="<?php the_title();?>" href="<?php the_permalink();?>"><?php the_title();?></a></h3>
 											<?php print apply_filters('mars_video_meta', null);?>
-                                            <?php the_excerpt();?> 
+                                            <?php the_excerpt();?>
                                             <p><a href="<?php the_permalink();?>"><i class="fa fa-play-circle"></i><?php _e('Watch Video','mars')?></a></p>
                                         </div>
                                     </div>
 				                    <?php
 				                    //if ( $i % 3 == 0 && $i < 18 ){
 				                    if ( $i % $video_rows == 0 && $i < $video_shows ){
-				                    	?></div><div class="item"><?php 
-				                    } 
+				                    	?></div><div class="item"><?php
+				                    }
 			                       	endwhile;
 				                      ?></div>
 				             <?php endif;?>
@@ -234,7 +234,7 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 				})(jQuery);
 				</script>
 				<?php endif;?>
-		<?php 
+		<?php
 		wp_reset_postdata();wp_reset_query();
 	}
 	function update( $new_instance, $old_instance ) {
@@ -250,8 +250,8 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 		$instance['rows'] = strip_tags( $new_instance['rows'] );
 		$instance['auto'] = strip_tags( $new_instance['auto'] );
 		$instance['view_more'] = strip_tags( $new_instance['view_more'] );
-		return $instance;		
-		
+		return $instance;
+
 	}
 	function form( $instance ){
 		$defaults = array( 'title' => __('Latest Videos', 'mars'));
@@ -259,20 +259,20 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'mars'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:100%;" />
-		</p>			
-		<p>  
+		</p>
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'video_category' ); ?>"><?php _e('Video Category:', 'mars'); ?></label>
-		    	<?php 
+		    	<?php
 					wp_dropdown_categories($args = array(
 							'show_option_all'    => 'All',
-							'orderby'            => 'ID', 
+							'orderby'            => 'ID',
 							'order'              => 'ASC',
 							'show_count'         => 1,
-							'hide_empty'         => 1, 
+							'hide_empty'         => 1,
 							'child_of'           => 0,
 							'echo'               => 1,
 							'selected'           => isset( $instance['video_category'] ) ? $instance['video_category'] : null,
-							'hierarchical'       => 0, 
+							'hierarchical'       => 0,
 							'name'               => $this->get_field_name( 'video_category' ),
 							'id'                 => $this->get_field_id( 'video_category' ),
 							'taxonomy'           => 'categories',
@@ -282,66 +282,66 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 		    		);
 		    	?>
 		</p>
-		<p>  
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'video_tag' ); ?>"><?php _e('Video Tag:', 'mars'); ?></label>
 		    <input placeholder="<?php _e('Eg: tag1,tag2,tag3','mars');?>" id="<?php echo $this->get_field_id( 'video_tag' ); ?>" name="<?php echo $this->get_field_name( 'video_tag' ); ?>" value="<?php echo ( isset( $instance['video_tag'] ) ? $instance['video_tag'] : null ); ?>" style="width:100%;" />
 		</p>
-		<p>  
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'date' ); ?>"><?php _e('Date (Show posts associated with a certain time and date period, (yy-mm-dd)):', 'mars'); ?></label>
 		    <input class="vt-datetime" id="<?php echo $this->get_field_id( 'date' ); ?>" name="<?php echo $this->get_field_name( 'date' ); ?>" value="<?php echo ( isset( $instance['date'] ) ? $instance['date'] : null ); ?>" style="width:100%;" />
-		</p>		
-		<p>  
+		</p>
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'video_orderby' ); ?>"><?php _e('Orderby:', 'mars'); ?></label>
 		    <select style="width:100%;" id="<?php echo $this->get_field_id( 'video_orderby' ); ?>" name="<?php echo $this->get_field_name( 'video_orderby' ); ?>">
-		    	<?php 
+		    	<?php
 		    		foreach ( post_orderby_options('video') as $key=>$value ){
 		    			$selected = ( $instance['video_orderby'] == $key ) ? 'selected' : null;
 		    			?>
 		    				<option <?php print $selected; ?> value="<?php print $key;?>"><?php print $value;?></option>
-		    			<?php 
+		    			<?php
 		    		}
 		    	?>
-		    </select>  
+		    </select>
 		</p>
-		<p>  
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'video_order' ); ?>"><?php _e('Order:', 'mars'); ?></label>
 		    <select style="width:100%;" id="<?php echo $this->get_field_id( 'video_order' ); ?>" name="<?php echo $this->get_field_name( 'video_order' ); ?>">
-		    	<?php 
+		    	<?php
 		    		foreach ( $this->widget_video_order() as $key=>$value ){
 		    			$selected = ( $instance['video_order'] == $key ) ? 'selected' : null;
 		    			?>
 		    				<option <?php print $selected; ?> value="<?php print $key;?>"><?php print $value;?></option>
-		    			<?php 
+		    			<?php
 		    		}
 		    	?>
-		    </select>  
-		</p>								 
-		<p>  
+		    </select>
+		</p>
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'widget_column' ); ?>"><?php _e('Widget Column:', 'mars'); ?></label>
 		    <select style="width:100%;" id="<?php echo $this->get_field_id( 'widget_column' ); ?>" name="<?php echo $this->get_field_name( 'widget_column' ); ?>">
-		    	<?php 
+		    	<?php
 		    		foreach ( $this->widget_video_column() as $key=>$value ){
 		    			$selected = ( $instance['widget_column'] == $key ) ? 'selected' : null;
 		    			?>
 		    				<option <?php print $selected; ?> value="<?php print $key;?>"><?php print $value;?></option>
-		    			<?php 
+		    			<?php
 		    		}
 		    	?>
-		    </select>  
+		    </select>
 		</p>
-		<p>  
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'video_shows' ); ?>"><?php _e('Shows:', 'mars'); ?></label>
 		    <input id="<?php echo $this->get_field_id( 'video_shows' ); ?>" name="<?php echo $this->get_field_name( 'video_shows' ); ?>" value="<?php echo (isset( $instance['video_shows'] )) ? (int)$instance['video_shows'] : 16; ?>" style="width:100%;" />
 		</p>
-		<p>  
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'rows' ); ?>"><?php _e('Rows (Available with 3 or 1 Column):', 'mars'); ?></label>
 		    <input id="<?php echo $this->get_field_id( 'rows' ); ?>" name="<?php echo $this->get_field_name( 'rows' ); ?>" value="<?php echo (isset( $instance['rows'] )) ? (int)$instance['rows'] : 1; ?>" style="width:100%;" />
 		</p>
-		<p>  
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'auto' ); ?>"><?php _e('Auto Play:', 'mars'); ?></label>
 		    <input type="checkbox" id="<?php echo $this->get_field_id( 'auto' ); ?>" name="<?php echo $this->get_field_name( 'auto' ); ?>" <?php  print isset( $instance['auto'] ) && $instance['auto'] =='on' ? 'checked' : null;?> />
-		</p>		
-		<p>  
+		</p>
+		<p>
 		    <label for="<?php echo $this->get_field_id( 'view_more' ); ?>"><?php _e('View more link (available for 2 columns.):', 'mars'); ?></label>
 		    <input id="<?php echo $this->get_field_id( 'view_more' ); ?>" name="<?php echo $this->get_field_name( 'view_more' ); ?>" value="<?php echo ( isset( $instance['view_more'] ) ? $instance['view_more'] : null ); ?>" style="width:100%;" />
 		</p>
@@ -359,5 +359,5 @@ class Mars_MainVideos_Widgets_Class extends WP_Widget{
 			'DESC'	=>	__('DESC','mars'),
 			'ASC'	=>	__('ASC','mars')
 		);
-	}	
+	}
 }

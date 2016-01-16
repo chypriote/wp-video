@@ -8,10 +8,10 @@
 	<?php dynamic_sidebar('mars-featured-videos-sidebar');?>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-sm-12">
 				<?php dynamic_sidebar('mars-home-videos-sidebar');?>
 			</div><!-- /.video-section -->
-			<?php get_sidebar();?>
+			<?php //get_sidebar();?>
 		</div><!-- /.row -->
 	</div><!-- /.container -->
 <?php get_footer();?>
