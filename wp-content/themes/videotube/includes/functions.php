@@ -98,7 +98,7 @@ if( !function_exists('mars_theme_comment_style') ){
 				<?php endif; ?>
 				<div class="avatar"><?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['avatar_size'] ); ?></div>
 				<div class="comment-content">
-					<span class="author"><?php print $comment->comment_author;?> <small><?php print human_time_diff( get_comment_time('U'), current_time('timestamp') ) . ' ago';?></small></span>
+					<span class="author"><?php print $comment->comment_author;?> <small>il y a <?php print human_time_diff( get_comment_time('U'), current_time('timestamp') );?></small></span>
 					<?php comment_text() ?>
 					<?php comment_reply_link(array_merge( $args, array('add_below' => null, 'depth' => $depth, 'max_depth' => $args['max_depth'],'reply_text'=>'<i class="fa fa-reply"></i> '.__('Reply','mars')))) ?>
 					<?php if( current_user_can('add_users') ):?>
@@ -270,12 +270,12 @@ if( !function_exists('mars_orderblock_videos') ){
 	function mars_orderblock_videos() {
 		$order = isset( $_REQUEST['order'] ) ?  trim($_REQUEST['order']) : null;
 		$sort_array = array(
-			'latest'	=>	__('Latest','mars'),
-			'viewed'	=>	__('Viewed','mars'),
-			'liked'	=>	__('Liked','mars'),
-			'comments'	=>	__('Comments','mars')
+			'latest'	=>	__('Dernières','mars'),
+			'viewed'	=>	__('Vues','mars'),
+			'liked'	=>	__('Likes','mars'),
+			'comments'	=>	__('Commentaires','mars')
 		);
-		$block = '<div class="section-nav"><ul class="sorting"><li class="sort-text">'.__('Sort by:','mars').'</li>';
+		$block = '<div class="section-nav"><ul class="sorting"><li class="sort-text">'.__('Trier par:','mars').'</li>';
 			foreach ( $sort_array as $key=>$value ){
 				$active = ( $order == $key ) ? 'class="active"' : null;
 				$block .= '<li '.$active.'><a href="?order='.$key.'">'.$value.'</a></li>';

@@ -105,7 +105,7 @@
 	/*** NAVIGATION ***/
 	#navigation-wrapper {
 		background: #4c5358;
-		margin-bottom: 30px;
+		margin-bottom: 2rem;
 	}
 	.navbar-collapse {
 		margin-right: -15px !important;
@@ -201,6 +201,12 @@
 		display: -o-flex;
 		display: flex;
 	}
+	.section-header a {
+		flex-grow: 1;
+	}
+	.section-header a:hover {
+		text-decoration: none;
+	}
 	.section-header h3 {
 		color: #888;
 		font-size: 20px;
@@ -209,6 +215,7 @@
 		font-family: Lato, sens-serif;
 		flex-grow: 1;
 		line-height: 2;
+		text-transform: uppercase;
 	}
 	.section-header h3 i {
 		font-size: 13px;
@@ -226,11 +233,15 @@
 		font-size: 9px;
 	}
 	.section-header .section-nav {
+		display: flex;
+    align-items: center;
+	}
+	.section-header .carousel-indicators {
 		float: right;
 		position: static;
 		width: auto;
 		margin: 0;
-	}
+  }
 	.section-header .section-nav .bullet {
 		background: #ddd;
 		width: 13px;
@@ -239,6 +250,7 @@
 		border-radius: 50px;
 		border: 0;
 		margin: 0;
+		margin-right: 4px;
 	}
 	.section-header .section-nav .bullet.active {
 		background: #e73737;
@@ -267,8 +279,11 @@
 	/*** FEATURED WRAPPER ***/
 	.featured-wrapper {
 		background: #f2f2f2;
-		padding: 30px 0 0;
+		padding: 0;
 		margin-bottom: 30px;
+	}
+	.featured-wrapper .section-header {
+		margin-bottom: 1rem;
 	}
 	.featured-wrapper .col-sm-4 {
 		margin-bottom: 30px
@@ -297,11 +312,33 @@
 	}
 
 	/*** ITEMS ***/
-	.video-section {
-		margin-bottom: 30px;
+	.row.video-section {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.row.video-section .item {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		margin-bottom: 1rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid #eee;
 	}
 	.item.big.list {
 		margin-bottom: 60px;
+	}
+	.carousel.video-section {
+		margin-bottom: 1.5rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid #eee;
+	}
+	.carousel-inner .item.active  {
+		display: flex;
+	}
+	.carousel-inner .item .item {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
 	}
 	.carousel-inner .item.active .row:last-child {
 		margin-bottom: -30px;
@@ -444,7 +481,8 @@
 
 	/*** WIDGETS ***/
 	.widget {
-		overflow: hidden;
+		display: flex;
+    flex-direction: column;
 		margin-bottom: 30px;
 	}
 	.widget ul li {
@@ -467,6 +505,16 @@
 		letter-spacing: 1px;
 		font-size: 14px;
 	}
+	.widget .row {
+		display: flex;
+	}
+	.widget .item {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+	.widget form {padding: 0 2rem;}
+	.widget form .form-group,.widget form input.form-control {width: 100%;}
 
 	/*** Social Widget ***/
 	.social-counter-item {

@@ -1,14 +1,13 @@
 <?php if( !defined('ABSPATH') ) exit;?>
 <?php get_header(); ?>
-<?php var_dump($header_main_navigation); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8">
-            	<div class="section-header">
-            	<?php global $wp_query;?>
-                    <h3><?php print $wp_query->get_queried_object()->name;?></h3>
-                    <?php do_action('mars_orderblock_videos',null);?>
-                </div>
+				<div class="section-header">
+					<?php global $wp_query;?>
+					<h3><?php print $wp_query->get_queried_object()->name;?></h3>
+					<?php do_action('mars_orderblock_videos',null);?>
+				</div>
 				<?php if( have_posts() ):?>
 				<div class="row video-section meta-maxwidth-230">
 					<?php
