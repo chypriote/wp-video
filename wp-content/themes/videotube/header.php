@@ -80,7 +80,7 @@
 						$final = array_reverse($final);
 					?>
 					<ul id="menu-all-pages" class="nav navbar-nav list-inline menu">
-						<li><a href="<?php print home_url();?>"><?php _e('Home','mars')?></a></li>
+						<li><a href="<?php print home_url();?>"><?php _e('Accueil','mars')?></a></li>
 						<?php foreach ($final as $item) {
 							if (count($item['childs'])) {$dpdwn = true;}
 							echo '<li class="menu-item menu-item-type-custom menu-item-object-custom ' . ($dpdwn ? 'dropdown menu-item-has-children': ''). '">';
@@ -90,7 +90,7 @@
 								echo '<ul class="dropdown-menu">';
 								foreach ($item['childs'] as $child) {
 									echo '<li class="menu-item menu-item-type-custom menu-item-object-custom depth">';
-									echo '<a href="/categories/'. $child['slug'] . '">' . $child['name'];
+									echo '<a href="/categories/'. $child['slug'] . '">' . $child['name'] . '</a>';
 									echo '<li>';
 								}
 								echo '</ul>';
