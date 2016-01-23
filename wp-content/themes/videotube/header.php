@@ -63,26 +63,41 @@
 						$menu = get_terms('categories');
 						foreach ($menu as $value) {
 							if ($value->parent == 0) {
-								$final[$value->term_id]['parent'] = $value;
+								$final[$value->term_id]['name'] = $value->name;
+								$final[$value->term_id]['slug'] = $value->slug;
 							} else {
-								$final[$value->parent]['child'][] = $value;
+								$temp[] = $value;
 							}
 						}
-						//var_dump($final);
-						//var_dump(get_term(307, 'categories'));
+						foreach ($temp as $value) {
+							if ($final[$value->parent]) {
+								$final[$value->parent]['childs'][$value->term_id]['name'] = $value->name;
+								$final[$value->parent]['childs'][$value->term_id]['slug'] = $value->slug;
+							}
+							else
+								$temp2[] = $value;
+						}
+						$final = array_reverse($final);
 					?>
-			  	<?php
-			  		if( has_nav_menu('header_main_navigation') ){
-				  		wp_nav_menu(array(
-				  			'theme_location'=>'header_main_navigation',
-				  			'menu_class'=>'nav navbar-nav list-inline menu',
-				  			'walker' => new Mars_Walker_Nav_Menu(),
-				  			'container'	=>	null
-				  		));
-			  		}
-			  		else { ?>
-			  				<ul class="nav navbar-nav list-inline menu"><li class="active"><a href="<?php print home_url();?>"><?php _e('Home','mars')?></a></li></ul>
-					<?php } ?>
+					<ul id="menu-all-pages" class="nav navbar-nav list-inline menu">
+						<li><a href="<?php print home_url();?>"><?php _e('Home','mars')?></a></li>
+						<?php foreach ($final as $item) {
+							if (count($item['childs'])) {$dpdwn = true;}
+							echo '<li class="menu-item menu-item-type-custom menu-item-object-custom ' . ($dpdwn ? 'dropdown menu-item-has-children': ''). '">';
+							echo '<a href="/categories/'. $item['slug'] . '">' . $item['name'];
+							echo $dpdwn ? ' <b class="caret"></b></a>' : '</a>';
+							if ($dpdwn) {
+								echo '<ul class="dropdown-menu">';
+								foreach ($item['childs'] as $child) {
+									echo '<li class="menu-item menu-item-type-custom menu-item-object-custom depth">';
+									echo '<a href="/categories/'. $child['slug'] . '">' . $child['name'];
+									echo '<li>';
+								}
+								echo '</ul>';
+							}
+							echo '</li>';
+						} ?>
+					</ul>
 			</nav>
 		</div>
 	</div><!-- /#navigation-wrapper -->
