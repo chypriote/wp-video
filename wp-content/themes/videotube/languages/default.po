@@ -260,35 +260,35 @@ msgstr ""
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/search.php:9
 #, php-format
 msgid "About %s results"
-msgstr ""
+msgstr "%s résultats"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/search.php:11
 #, php-format
 msgid "About %s result"
-msgstr ""
+msgstr "%s résultats"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/search.php:33
 msgid "Nothing Found."
-msgstr ""
+msgstr "Aucun résultat"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single-video.php:54
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/includes/functions.php:276
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/includes/single-video.php:38
 msgid "Comments"
-msgstr ""
+msgstr "Commentaires"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single-video.php:61
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/includes/single-video.php:45
 msgid "Share"
-msgstr ""
+msgstr "Partager"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single-video.php:79
 msgid "Please login to continue."
-msgstr ""
+msgstr "Connectez vous pour continuer"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single-video.php:94
 msgid "Turn off Light"
-msgstr ""
+msgstr "Mode cinéma"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single-video.php:116
 #, php-format
@@ -298,7 +298,7 @@ msgstr ""
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single-video.php:123
 #, php-format
 msgid "Published on %s by %s"
-msgstr ""
+msgstr "Publié le %s par %s"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single-video.php:125
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single.php:41
@@ -306,7 +306,7 @@ msgstr ""
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/includes/Mars_ShortcodeSubmitVideo.php:150
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/includes/single-video.php:72
 msgid "Category"
-msgstr ""
+msgstr "Catégories"
 
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single-video.php:126
 #: D:\zend\Apache2\htdocs\sweethome\wp-content\themes\videotube/single.php:42
