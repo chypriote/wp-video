@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?php wp_title(''); ?></title>
 	<!--[if lt IE 9]>
+<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon.png" />
 	  <script src="<?php print get_template_directory_uri();?>/assets/js/ie8/html5shiv.js"></script>
       <script src="<?php print get_template_directory_uri();?>/assets/js/ie8/respond.min.js"></script>
 	<![endif]-->
